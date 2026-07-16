@@ -7,12 +7,12 @@ import {
   fetchIncome, fetchIncomeCategories, fetchTransfers,
 } from "@/lib/db";
 import { inr, fmtDate } from "@/lib/format";
-import { exportToCSV } from "@/lib/csv";
 import { useMemo, useState } from "react";
-import { Download, Search } from "lucide-react";
+import { Search, SlidersHorizontal } from "lucide-react";
 
 import { RequireRole } from "@/components/RequireRole";
 import { ADMIN_ROLES } from "@/lib/permissions";
+import { ExportFilterDialog } from "@/components/ExportFilterDialog";
 
 export const Route = createFileRoute("/_authenticated/transactions")({
   head: () => ({ meta: [{ title: "All Transactions — CSC Computer Education" }] }),
@@ -30,6 +30,7 @@ function TxnsPage() {
 
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState<"all" | "income" | "expense" | "transfer">("all");
+  const [exportOpen, setExportOpen] = useState(false);
 
   const accountMap = new Map((accounts.data ?? []).map((a) => [a.id, a] as const));
   const branchMap = new Map((branches.data ?? []).map((b) => [b.id, b] as const));
@@ -75,9 +76,9 @@ function TxnsPage() {
       title="All Transactions"
       action={
         <button
-          onClick={() => exportToCSV("transactions.csv", filtered.map((r) => ({ Date: r.date, Type: r.kind, Label: r.label, Detail: r.sub, Amount: r.amount })))}
+          onClick={() => setExportOpen(true)}
           className="inline-flex items-center gap-1.5 rounded-xl border bg-white/70 px-3 py-2 text-sm font-semibold"
-        ><Download className="h-4 w-4" /> Export</button>
+        ><SlidersHorizontal className="h-4 w-4" /> Export…</button>
       }
     >
       <div className="glass mb-4 flex flex-wrap items-center gap-3 rounded-2xl p-3">
@@ -107,6 +108,18 @@ function TxnsPage() {
           {!filtered.length && <p className="py-12 text-center text-sm text-muted-foreground">No matching transactions.</p>}
         </div>
       </div>
+
+      {exportOpen && (
+        <ExportFilterDialog
+          onClose={() => setExportOpen(false)}
+          income={inc.data ?? []}
+          expenses={exp.data ?? []}
+          incomeCats={incCats.data ?? []}
+          expenseCats={expCats.data ?? []}
+          branches={branches.data ?? []}
+          accounts={accounts.data ?? []}
+        />
+      )}
     </AppShell>
   );
 }

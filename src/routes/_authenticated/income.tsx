@@ -71,13 +71,13 @@ function IncomePage() {
               exportToCSV(
                 "income.csv",
                 filtered.map((r) => ({
-                  Date: r.txn_date,
-                  Branch: branchMap.get(r.branch_id ?? "")?.name ?? "",
                   Category: catMap.get(r.category_id ?? "")?.name ?? "",
+                  Name: r.notes ?? "",
+                  Branch: branchMap.get(r.branch_id ?? "")?.name ?? "",
+                  "Payment Mode": r.payment_mode,
+                  Date: fmtDate(r.txn_date),
+                  Amount: Number(r.amount),
                   Account: accountMap.get(r.account_id ?? "")?.name ?? "",
-                  Mode: r.payment_mode,
-                  Amount: r.amount,
-                  Notes: r.notes ?? "",
                 })),
               )
             }
