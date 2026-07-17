@@ -1,7 +1,7 @@
 import { Landmark, Wallet } from "lucide-react";
-import hdfcLogo from "@/assets/hdfc.jpg";
-import kvbLogo from "@/assets/kvb.jpg";
-import canaraLogo from "@/assets/canara.jpg";
+import hdfcUrl from "@/assets/hdfc.jpg";
+import kvbUrl from "@/assets/kvb.jpg";
+import canaraUrl from "@/assets/canara.jpg";
 
 type Bank = "hdfc" | "kvb" | "canara" | "sbi" | "icici" | "axis" | "other" | "cash";
 
@@ -17,9 +17,9 @@ const labels: Record<Bank, string> = {
 };
 
 const LOGOS: Partial<Record<Bank, { url: string; bg: string }>> = {
-  hdfc: { url: hdfcLogo, bg: "#ffffff" },
-  kvb: { url: kvbLogo, bg: "#FFF9B0" },
-  canara: { url: canaraLogo, bg: "#ffffff" },
+  hdfc: { url: hdfcUrl, bg: "#ffffff" },
+  kvb: { url: kvbUrl, bg: "#FFF9B0" },
+  canara: { url: canaraUrl, bg: "#ffffff" },
 };
 
 export function BankBadge({
