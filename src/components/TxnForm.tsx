@@ -6,6 +6,7 @@ import { todayISO } from "@/lib/format";
 import { uploadAttachment, type Account, type Branch, type Category } from "@/lib/db";
 import { toast } from "sonner";
 import { Plus, X } from "lucide-react";
+import { SearchableSelect } from "@/components/SearchableSelect";
 
 type Mode = "income" | "expense";
 
@@ -154,11 +155,12 @@ export function TxnForm({
           {!hideBranch && (
             <label className="text-sm">
               <span className="mb-1 block text-xs font-medium text-muted-foreground">Branch</span>
-              <select className="w-full rounded-xl border bg-white/70 px-3 py-2" value={branch_id} onChange={(e) => setBranch(e.target.value)}>
-                <option value="">— none —</option>
-                {branches.map((b) => <option key={b.id} value={b.id}>{b.name}</option>)}
-                <option value="__other">+ Others (custom)</option>
-              </select>
+              <SearchableSelect
+                value={branch_id}
+                onChange={setBranch}
+                options={branches.map((b) => ({ value: b.id, label: b.name }))}
+                placeholder="— none —"
+              />
               {branch_id === "__other" && (
                 <input
                   type="text"
@@ -172,11 +174,12 @@ export function TxnForm({
           )}
           <label className="text-sm">
             <span className="mb-1 block text-xs font-medium text-muted-foreground">Category</span>
-            <select className="w-full rounded-xl border bg-white/70 px-3 py-2" value={category_id} onChange={(e) => setCategory(e.target.value)}>
-              <option value="">— none —</option>
-              {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-              <option value="__other">+ Others (custom)</option>
-            </select>
+            <SearchableSelect
+              value={category_id}
+              onChange={setCategory}
+              options={categories.map((c) => ({ value: c.id, label: c.name }))}
+              placeholder="— none —"
+            />
             {category_id === "__other" && (
               <input
                 type="text"
@@ -189,10 +192,14 @@ export function TxnForm({
           </label>
           <label className="text-sm">
             <span className="mb-1 block text-xs font-medium text-muted-foreground">Bank Account <span className="text-rose-500">*</span></span>
-            <select required className="w-full rounded-xl border bg-white/70 px-3 py-2" value={account_id} onChange={(e) => setAccount(e.target.value)}>
-              <option value="">— select account —</option>
-              {accounts.map((a) => <option key={a.id} value={a.id}>{a.name}</option>)}
-            </select>
+            <SearchableSelect
+              value={account_id}
+              onChange={setAccount}
+              options={accounts.map((a) => ({ value: a.id, label: a.name }))}
+              placeholder="— select account —"
+              noneLabel="— select account —"
+              includeOthers={false}
+            />
           </label>
           <label className="text-sm">
             <span className="mb-1 block text-xs font-medium text-muted-foreground">Payment Mode</span>

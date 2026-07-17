@@ -1,7 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { AppSidebar } from "./AppSidebar";
-import { Menu, Plus } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+import { Menu } from "lucide-react";
 
 export function AppShell({ children, title, action }: { children: ReactNode; title?: string; action?: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -36,12 +35,6 @@ export function AppShell({ children, title, action }: { children: ReactNode; tit
           </div>
           <div className="flex shrink-0 items-center gap-2">
             {action}
-            <Link
-              to="/income"
-              className="hidden items-center gap-1.5 rounded-xl gradient-sky px-3 py-2 text-sm font-semibold text-white shadow-md transition hover:opacity-90 sm:inline-flex"
-            >
-              <Plus className="h-4 w-4" /> Quick Add
-            </Link>
           </div>
         </header>
 

@@ -159,6 +159,9 @@ export type Database = {
         Row: {
           account_id: string | null
           amount: number
+          cheque_bank: string | null
+          cheque_date: string | null
+          cheque_no: string | null
           created_at: string
           created_by: string | null
           id: string
@@ -173,6 +176,9 @@ export type Database = {
         Insert: {
           account_id?: string | null
           amount: number
+          cheque_bank?: string | null
+          cheque_date?: string | null
+          cheque_no?: string | null
           created_at?: string
           created_by?: string | null
           id?: string
@@ -187,6 +193,9 @@ export type Database = {
         Update: {
           account_id?: string | null
           amount?: number
+          cheque_bank?: string | null
+          cheque_date?: string | null
+          cheque_no?: string | null
           created_at?: string
           created_by?: string | null
           id?: string
@@ -674,6 +683,8 @@ export type Database = {
         | "gpay_returned"
         | "transfer_received"
         | "transfer_returned"
+        | "cheque_received"
+        | "cheque_returned"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -827,6 +838,8 @@ export const Constants = {
         "gpay_returned",
         "transfer_received",
         "transfer_returned",
+        "cheque_received",
+        "cheque_returned",
       ],
     },
   },
