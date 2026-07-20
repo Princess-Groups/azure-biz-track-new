@@ -38,7 +38,7 @@ export function EditAccountDialog({ account, onClose }: { account: Account; onCl
   });
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/30 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/30 p-4 backdrop-blur-sm flex items-start justify-center">
       <div className="glass w-full max-w-md rounded-2xl p-6">
         <div className="flex items-start justify-between gap-3">
           <div>
@@ -118,7 +118,7 @@ export function DeleteAccountDialog({
   const matches = confirmName.trim() === account.name;
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/40 p-4 backdrop-blur-sm flex items-start justify-center">
       <div className="glass w-full max-w-md rounded-2xl border-2 border-rose-200 p-6">
         <h2 className="text-lg font-bold text-rose-700">Delete Account?</h2>
         <p className="mt-2 text-sm text-muted-foreground">

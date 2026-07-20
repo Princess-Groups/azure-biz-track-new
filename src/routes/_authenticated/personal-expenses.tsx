@@ -163,6 +163,7 @@ function PersonalExpensesPage() {
           categories={personalCats}
           onClose={() => setOpen(false)}
           hideBranch
+          isPersonal
         />
       )}
     </AppShell>

@@ -9,28 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
-import { Route as AuthenticatedTransfersRouteImport } from './routes/_authenticated/transfers'
-import { Route as AuthenticatedTransactionsRouteImport } from './routes/_authenticated/transactions'
-import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
-import { Route as AuthenticatedReceivablesRouteImport } from './routes/_authenticated/receivables'
-import { Route as AuthenticatedPersonalExpensesRouteImport } from './routes/_authenticated/personal-expenses'
-import { Route as AuthenticatedIncomeRouteImport } from './routes/_authenticated/income'
-import { Route as AuthenticatedExpensesRouteImport } from './routes/_authenticated/expenses'
 import { Route as AuthenticatedAccountsRouteImport } from './routes/_authenticated/accounts'
-import { Route as AuthenticatedReportsYearlyRouteImport } from './routes/_authenticated/reports.yearly'
-import { Route as AuthenticatedReportsMonthlyRouteImport } from './routes/_authenticated/reports.monthly'
+import { Route as AuthenticatedExpensesRouteImport } from './routes/_authenticated/expenses'
+import { Route as AuthenticatedIncomeRouteImport } from './routes/_authenticated/income'
+import { Route as AuthenticatedPersonalExpensesRouteImport } from './routes/_authenticated/personal-expenses'
+import { Route as AuthenticatedReceivablesRouteImport } from './routes/_authenticated/receivables'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedTransactionsRouteImport } from './routes/_authenticated/transactions'
+import { Route as AuthenticatedTransfersRouteImport } from './routes/_authenticated/transfers'
 import { Route as AuthenticatedReportsDailyRouteImport } from './routes/_authenticated/reports.daily'
+import { Route as AuthenticatedReportsMonthlyRouteImport } from './routes/_authenticated/reports.monthly'
+import { Route as AuthenticatedReportsYearlyRouteImport } from './routes/_authenticated/reports.yearly'
 
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedRoute = AuthenticatedRouteImport.update({
-  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
@@ -38,9 +38,36 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-const AuthenticatedTransfersRoute = AuthenticatedTransfersRouteImport.update({
-  id: '/transfers',
-  path: '/transfers',
+const AuthenticatedAccountsRoute = AuthenticatedAccountsRouteImport.update({
+  id: '/accounts',
+  path: '/accounts',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedExpensesRoute = AuthenticatedExpensesRouteImport.update({
+  id: '/expenses',
+  path: '/expenses',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedIncomeRoute = AuthenticatedIncomeRouteImport.update({
+  id: '/income',
+  path: '/income',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPersonalExpensesRoute =
+  AuthenticatedPersonalExpensesRouteImport.update({
+    id: '/personal-expenses',
+    path: '/personal-expenses',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedReceivablesRoute =
+  AuthenticatedReceivablesRouteImport.update({
+    id: '/receivables',
+    path: '/receivables',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedTransactionsRoute =
@@ -49,42 +76,15 @@ const AuthenticatedTransactionsRoute =
     path: '/transactions',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
-const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
+const AuthenticatedTransfersRoute = AuthenticatedTransfersRouteImport.update({
+  id: '/transfers',
+  path: '/transfers',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-const AuthenticatedReceivablesRoute =
-  AuthenticatedReceivablesRouteImport.update({
-    id: '/receivables',
-    path: '/receivables',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
-const AuthenticatedPersonalExpensesRoute =
-  AuthenticatedPersonalExpensesRouteImport.update({
-    id: '/personal-expenses',
-    path: '/personal-expenses',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
-const AuthenticatedIncomeRoute = AuthenticatedIncomeRouteImport.update({
-  id: '/income',
-  path: '/income',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedExpensesRoute = AuthenticatedExpensesRouteImport.update({
-  id: '/expenses',
-  path: '/expenses',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedAccountsRoute = AuthenticatedAccountsRouteImport.update({
-  id: '/accounts',
-  path: '/accounts',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-const AuthenticatedReportsYearlyRoute =
-  AuthenticatedReportsYearlyRouteImport.update({
-    id: '/reports/yearly',
-    path: '/reports/yearly',
+const AuthenticatedReportsDailyRoute =
+  AuthenticatedReportsDailyRouteImport.update({
+    id: '/reports/daily',
+    path: '/reports/daily',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 const AuthenticatedReportsMonthlyRoute =
@@ -93,10 +93,10 @@ const AuthenticatedReportsMonthlyRoute =
     path: '/reports/monthly',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
-const AuthenticatedReportsDailyRoute =
-  AuthenticatedReportsDailyRouteImport.update({
-    id: '/reports/daily',
-    path: '/reports/daily',
+const AuthenticatedReportsYearlyRoute =
+  AuthenticatedReportsYearlyRouteImport.update({
+    id: '/reports/yearly',
+    path: '/reports/yearly',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
 
@@ -203,18 +203,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/': {
@@ -224,46 +224,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/transfers': {
-      id: '/_authenticated/transfers'
-      path: '/transfers'
-      fullPath: '/transfers'
-      preLoaderRoute: typeof AuthenticatedTransfersRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/transactions': {
-      id: '/_authenticated/transactions'
-      path: '/transactions'
-      fullPath: '/transactions'
-      preLoaderRoute: typeof AuthenticatedTransactionsRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/settings': {
-      id: '/_authenticated/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/receivables': {
-      id: '/_authenticated/receivables'
-      path: '/receivables'
-      fullPath: '/receivables'
-      preLoaderRoute: typeof AuthenticatedReceivablesRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/personal-expenses': {
-      id: '/_authenticated/personal-expenses'
-      path: '/personal-expenses'
-      fullPath: '/personal-expenses'
-      preLoaderRoute: typeof AuthenticatedPersonalExpensesRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/income': {
-      id: '/_authenticated/income'
-      path: '/income'
-      fullPath: '/income'
-      preLoaderRoute: typeof AuthenticatedIncomeRouteImport
+    '/_authenticated/accounts': {
+      id: '/_authenticated/accounts'
+      path: '/accounts'
+      fullPath: '/accounts'
+      preLoaderRoute: typeof AuthenticatedAccountsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/expenses': {
@@ -273,18 +238,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedExpensesRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/accounts': {
-      id: '/_authenticated/accounts'
-      path: '/accounts'
-      fullPath: '/accounts'
-      preLoaderRoute: typeof AuthenticatedAccountsRouteImport
+    '/_authenticated/income': {
+      id: '/_authenticated/income'
+      path: '/income'
+      fullPath: '/income'
+      preLoaderRoute: typeof AuthenticatedIncomeRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/reports/yearly': {
-      id: '/_authenticated/reports/yearly'
-      path: '/reports/yearly'
-      fullPath: '/reports/yearly'
-      preLoaderRoute: typeof AuthenticatedReportsYearlyRouteImport
+    '/_authenticated/personal-expenses': {
+      id: '/_authenticated/personal-expenses'
+      path: '/personal-expenses'
+      fullPath: '/personal-expenses'
+      preLoaderRoute: typeof AuthenticatedPersonalExpensesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/receivables': {
+      id: '/_authenticated/receivables'
+      path: '/receivables'
+      fullPath: '/receivables'
+      preLoaderRoute: typeof AuthenticatedReceivablesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/transactions': {
+      id: '/_authenticated/transactions'
+      path: '/transactions'
+      fullPath: '/transactions'
+      preLoaderRoute: typeof AuthenticatedTransactionsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/transfers': {
+      id: '/_authenticated/transfers'
+      path: '/transfers'
+      fullPath: '/transfers'
+      preLoaderRoute: typeof AuthenticatedTransfersRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/reports/daily': {
+      id: '/_authenticated/reports/daily'
+      path: '/reports/daily'
+      fullPath: '/reports/daily'
+      preLoaderRoute: typeof AuthenticatedReportsDailyRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/reports/monthly': {
@@ -294,11 +294,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedReportsMonthlyRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/reports/daily': {
-      id: '/_authenticated/reports/daily'
-      path: '/reports/daily'
-      fullPath: '/reports/daily'
-      preLoaderRoute: typeof AuthenticatedReportsDailyRouteImport
+    '/_authenticated/reports/yearly': {
+      id: '/_authenticated/reports/yearly'
+      path: '/reports/yearly'
+      fullPath: '/reports/yearly'
+      preLoaderRoute: typeof AuthenticatedReportsYearlyRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
   }
@@ -345,3 +345,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

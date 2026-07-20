@@ -156,7 +156,7 @@ function ReceivablesPage() {
       </div>
 
       {open && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-black/30 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/30 p-4 backdrop-blur-sm flex items-start justify-center">
           <div className="glass w-full max-w-md rounded-2xl p-6">
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-lg font-bold">New Receivable / Return</h2>
@@ -197,7 +197,7 @@ function ReceivablesPage() {
       )}
 
       {settleFor && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-black/30 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/30 p-4 backdrop-blur-sm flex items-start justify-center">
           <div className="glass w-full max-w-md rounded-2xl p-6">
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-lg font-bold">Settle Receivable</h2>

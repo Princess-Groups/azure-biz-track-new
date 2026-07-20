@@ -28,6 +28,7 @@ export function TxnForm({
   categories,
   onClose,
   hideBranch = false,
+  isPersonal = false,
   editing = null,
 }: {
   mode: Mode;
@@ -36,6 +37,7 @@ export function TxnForm({
   categories: Category[];
   onClose: () => void;
   hideBranch?: boolean;
+  isPersonal?: boolean;
   editing?: EditingTxn | null;
 }) {
   const { user } = useAuth();
@@ -70,11 +72,14 @@ export function TxnForm({
         if (existing) {
           finalCategoryId = existing.id;
         } else {
-          const { data, error } = await (supabase.from(table) as unknown as { insert: (v: Record<string, unknown>) => { select: (c: string) => { single: () => Promise<{ data: { id: string } | null; error: unknown }> } } }).insert({ name, icon: "tag", color: "#94a3b8", is_active: true }).select("id").single();
+          const insertPayload: Record<string, unknown> = { name, icon: "tag", color: "#94a3b8", is_active: true };
+          if (mode === "expense" && isPersonal) insertPayload.is_personal = true;
+          const { data, error } = await (supabase.from(table) as unknown as { insert: (v: Record<string, unknown>) => { select: (c: string) => { single: () => Promise<{ data: { id: string } | null; error: unknown }> } } }).insert(insertPayload).select("id").single();
           if (error) throw error;
-          finalCategoryId = data?.id ?? null;
-        }
-      }
+           finalCategoryId = data?.id ?? null;
+         }
+       }
+
 
       // Resolve "Others" for branch → auto-create branch row
       let finalBranchId: string | null = hideBranch ? null : (branch_id || null);
@@ -137,8 +142,9 @@ export function TxnForm({
   });
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/30 p-4 backdrop-blur-sm">
-      <div className="glass w-full max-w-lg rounded-2xl p-6">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/30 p-4 backdrop-blur-sm">
+      <div className="glass mx-auto my-4 w-full max-w-lg rounded-2xl p-6 sm:my-8">
+
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-lg font-bold">{isEdit ? "Edit" : "Add"} {mode === "income" ? "Income" : "Expense"}</h2>
           <button onClick={onClose} className="grid h-8 w-8 place-items-center rounded-lg hover:bg-white/60"><X className="h-4 w-4" /></button>

@@ -35,7 +35,7 @@ export function OpeningBalanceDialog({
   });
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/30 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/30 p-4 backdrop-blur-sm flex items-start justify-center">
       <div className="glass w-full max-w-md rounded-2xl p-6">
         <div className="flex items-start justify-between gap-3">
           <div>

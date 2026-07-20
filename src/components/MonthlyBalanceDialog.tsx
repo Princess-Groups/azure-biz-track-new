@@ -83,7 +83,7 @@ export function MonthlyBalanceDialog({
   const years = Array.from({ length: 7 }, (_, i) => now.getFullYear() - 3 + i);
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/30 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/30 p-4 backdrop-blur-sm flex items-start justify-center">
       <div className="glass w-full max-w-md rounded-2xl p-6">
         <div className="flex items-start justify-between gap-3">
           <div>

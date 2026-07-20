@@ -209,7 +209,7 @@ function TransfersPage() {
       </div>
 
       {open && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-black/30 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/30 p-4 backdrop-blur-sm flex items-start justify-center">
           <div className="glass w-full max-w-md rounded-2xl p-6">
             <h2 className="text-lg font-bold">{editingId ? "Edit Transfer" : "New Transfer"}</h2>
             <div className="mt-4 grid gap-3">
@@ -250,7 +250,7 @@ function TransfersPage() {
       )}
 
       {manageOpen && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-black/30 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/30 p-4 backdrop-blur-sm flex items-start justify-center">
           <div className="glass w-full max-w-lg rounded-2xl p-6">
             <div className="flex items-start justify-between">
               <div>

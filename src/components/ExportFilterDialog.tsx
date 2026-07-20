@@ -128,7 +128,7 @@ export function ExportFilterDialog({
   }
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 p-4">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/40 p-4 flex items-start justify-center">
       <div className="glass w-full max-w-2xl rounded-2xl border bg-white p-5 shadow-xl">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-lg font-bold">Advanced Export</h2>
